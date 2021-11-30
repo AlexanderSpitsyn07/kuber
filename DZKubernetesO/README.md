@@ -4,7 +4,7 @@
 На основе dockerfile из папки 13-kubernetes-config собрал образ фронтенда - 
 ![Screenshot](1-1.png)
 Затем бэкенда -
-![Screenshot](1-2png)
+![Screenshot](1-2.png)
 Образ postgress самоподгрузился из интернета.
 
 ## Задание 1: подготовить тестовый конфиг для запуска приложения
@@ -13,10 +13,10 @@
 * регулируется с помощью deployment фронтенд и бекенд;
 * база данных — через statefulset.
 
-![Screenshot](2-1png)
-![Screenshot](2-2-1png)
-![Screenshot](2-2-2png)
-![Screenshot](2-3png)
+![Screenshot](2-1.png)
+![Screenshot](2-2-1.png)
+![Screenshot](2-2-2.png)
+![Screenshot](2-3.png)
 
 Файлы конфигурации находятся в папке z1.
 
@@ -27,8 +27,8 @@
 * в окружении фронта прописан адрес сервиса бекенда;
 * в окружении бекенда прописан адрес сервиса базы данных.
 
-![Screenshot](3-1png)
-![Screenshot](3-2png)
+![Screenshot](3-1.png)
+![Screenshot](3-2.png)
 
 Файлы конфигурации находятся в папке z2.
 
