@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+spec:
+  serviceName: db
+  selector:
+    matchLabels:
+      app: frontback
+      tier: postgres
+  template:
+    metadata:
+      labels:
+        app: frontback
+        tier: postgres
+    spec:
+      containers:
+       - name: db
+         image: postgres:13-alpine
+         envFrom:
+           - configMapRef:
+               name: postgres-config    
+         ports:
+         - containerPort: 5432
+           name: db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    app: frontback
+    tier: postgres
+spec:
+  type: NodePort
+  ports:
+   - port: 5432
+  selector:
+    app: frontback
+    tier: postgres
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    app: ecommerce
+    tier: postgres
+data:
+  POSTGRES_DB: news
+  POSTGRES_HOST_AUTH_METHOD: trust
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  PGDATA: /var/lib/postgresql/data/pgdata
+

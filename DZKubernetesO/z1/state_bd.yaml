@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+spec:
+  serviceName: "db"
+  selector:
+    matchLabels:
+      app: db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: news
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+          image: postgres:13-alpine
+          name: db
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: dbs
+spec:
+  selector:
+    app: db
+  type: LoadBalancer
+  ports:
+    - port: 5432
+      targetPort: 5432
