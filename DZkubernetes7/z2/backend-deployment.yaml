@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontback
+    tier: backend
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: frontback
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontback
+        tier: backend
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: news
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: DATABASE_USER
+          value: postgres
+        - name: DATABASE_PORT
+          value: "5432"
+        image: backend:1.1
+        imagePullPolicy: "IfNotPresent"
+        name: backend
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /mnt/nfs   
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: share
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: frontback
+    tier: backend
+  name: backend
+spec:
+  type: NodePort
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: frontback
+    tier: backend

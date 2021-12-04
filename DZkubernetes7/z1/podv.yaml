@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podv
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.20
+      volumeMounts:
+        - mountPath: "/static"
+          name: static
+    - name: busybox
+      image: busybox
+      command: ["sleep", "5000000000"]
+      volumeMounts:
+        - mountPath: "/tmp/111"
+          name: static
+  volumes:
+    - name: static
+
