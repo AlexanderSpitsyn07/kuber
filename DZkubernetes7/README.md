@@ -33,6 +33,7 @@
 
 Для задания использовал фронт и бэк из предыдущего ДЗ, с добавлением в деплои volumeMounts.
 Файлы конфигурации находятся в папке z2.
+
 ![Screenshot](2-1.png)
 ![Screenshot](2-2.png)
 
@@ -44,4 +45,5 @@
 
 ---
 
+https://github.com/AlexanderSpitsyn07/kuber/tree/master/DZkubernetes7
 
